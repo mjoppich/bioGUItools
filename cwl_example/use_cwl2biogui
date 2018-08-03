@@ -1,0 +1,8 @@
+First we need to install tooldog to get CWL workflows from bio.tools :)
+
+pip3 install tooldog
+
+We then choose a tool which has bindings for CWL:
+
+tooldog --cwl integron_finder > integron_finder.cwl
+

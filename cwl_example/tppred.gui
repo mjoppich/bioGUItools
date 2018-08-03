@@ -1,0 +1,49 @@
+<template description="poreSTAT" title="poreSTAT">
+  <window title="poreSTAT">
+    <label>Organelle targeting peptide prediction.
+
+External links:
+Tool homepage: http://tppred.biocomp.unibo.it/tppred/default/index
+bio.tools entry: tppred_1.0
+
+</label>
+    <group id="programgroup" title="poreStat" exclusive="true">
+      <group id="_group" title="" checkable="true">
+        <label></label>
+        <group>
+          <hgroup>
+            <label>INPUT1</label>
+            <input hint="" id="_INPUT1" type="string"/>
+          </hgroup>
+        </group>
+        <group>
+          <hgroup>
+            <label>OUTPUT1</label>
+            <input hint="" id="_OUTPUT1" type="string"/>
+          </hgroup>
+        </group>
+        <action hint="Click to Run Program" id="_run" program="tppred_">Run Program</action>
+      </group>
+    </group>
+    <group>
+      <streambox id="output1">
+        <stream id="outstream">COUT</stream>
+        <stream id="errstream">CERR</stream>
+      </streambox>
+    </group>
+  </window>
+  <execution>
+    <if id="_INPUT1_val" comp="IS_SET" value1="${_INPUT1}" sep=" ">
+      <const>I</const>
+      <value from="${_INPUT1}"/>
+    </if>
+    <if id="_OUTPUT1_val" comp="IS_SET" value1="${_OUTPUT1}" sep=" ">
+      <const>O</const>
+      <value from="${_OUTPUT1}"/>
+    </if>
+    <execute program="tppred_" exec="tppred" param="${_INPUT1_val} ${_OUTPUT1_val}" wsl="true">
+      <output type="COUT" color="green" to="outstream"/>
+      <output type="CERR" color="red" to="errstream"/>
+    </execute>
+  </execution>
+</template>
